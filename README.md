@@ -1,2 +1,2 @@
 # PSI
-https://github.com/karolinakuligowska/Projektowanie_systemow_informatycznych_2026/tree/main/01.Zajecia_organizacyjne_Rozgrzewka_w_R
+https://docs.google.com/document/d/1a50kMxeBuGaPhcUhWmwUuoOl5TbrcNMFvXRDp1pjlh4/edit?usp=drive_link
