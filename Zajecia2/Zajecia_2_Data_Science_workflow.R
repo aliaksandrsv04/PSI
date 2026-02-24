@@ -1,6 +1,6 @@
 #"/home/rarety"
 #install.packages("writexl")
-  
+#2.1. Import danych----
 library(readxl)
 library(dplyr)
 library(ggplot2)
@@ -10,6 +10,7 @@ getwd()
 kraje_1 = read.table("kraje_makro_1.csv", header=TRUE, sep=",", dec=".")
 kraje_2 = read.table("kraje_makro_2.csv", header=TRUE, sep=",", dec=".")
 
+# 2.2. Przygotowanie danych ----
 
 # Pierwsze
 head(kraje_1)	# pierwsze 6 wierszy (obserwacji)
@@ -53,7 +54,7 @@ summary(kraje_2)
 levels(kraje_2$Region)
 
 
-# Porządkowanie braków danych ----
+# Porządkowanie braków danych
 # Szybka kontrola braków danych we wszystkich kolumnach:
 colSums(is.na(kraje_1))	# nie ma braków danych
 colSums(is.na(kraje_2))	# są 4 braki danych w kolumnie (zmiennej) Internet_proc.
@@ -71,12 +72,14 @@ kraje_2$Region  = gsub("&", "and", kraje_2$Region)
 kraje_2$Region = as.factor(kraje_2$Region)
 levels(kraje_2$Region)
 
+#2.3. Łączenie (scalanie) ramek danych w jedną ----
+
 kraje = merge(kraje_1, kraje_2, by.x="Kod", by.y="Kod_kraju")
 kraje$Nazwa = NULL
 
 summary(kraje)
 str(kraje)
-
+#2.4. Podstawowa analiza danych----
 # Tworzenie nowej zmiennej Populacja_w_mln w dplyr:
 kraje = kraje %>%
   mutate(Populacja_mln = Populacja / 1e6)
@@ -161,12 +164,12 @@ kraje %>%
 
 
 
-#2.5. Wizualizacja [* zaawansowane *]
+#2.5. Wizualizacja [* zaawansowane *]----
 # Wizualizacja danych także pozwala zidentyfikować wzorce i zależności w zbiorze danych.
 
 # install.packages("ggplot2")
 library(ggplot2)
-
+#2.6. Eksport----
 write.csv(kraje, "kraje_analiza.csv") 
 write_xlsx(kraje, "kraje_wynik.xlsx")
 
